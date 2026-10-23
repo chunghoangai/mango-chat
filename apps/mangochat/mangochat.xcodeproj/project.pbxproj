@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DBDDDEBC308A5D6E00285AD7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DBDDDEBB308A5D6E00285AD7 /* Realm */; };
+		DBDDDEBE308A5D6E00285AD7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DBDDDEBD308A5D6E00285AD7 /* RealmSwift */; };
+		DBDDDEC1308A5DB800285AD7 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = DBDDDEC0308A5DB800285AD7 /* OAuth2 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		DBDDDE813089DA3700285AD7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBDDDEC1308A5DB800285AD7 /* OAuth2 in Frameworks */,
+				DBDDDEBE308A5D6E00285AD7 /* RealmSwift in Frameworks */,
+				DBDDDEBC308A5D6E00285AD7 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,9 @@
 			);
 			name = mangochat;
 			packageProductDependencies = (
+				DBDDDEBB308A5D6E00285AD7 /* Realm */,
+				DBDDDEBD308A5D6E00285AD7 /* RealmSwift */,
+				DBDDDEC0308A5DB800285AD7 /* OAuth2 */,
 			);
 			productName = mangochat;
 			productReference = DBDDDE733089DA3400285AD7 /* mangochat.app */;
@@ -195,6 +207,10 @@
 			);
 			mainGroup = DBDDDE6A3089DA3400285AD7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DBDDDEBA308A5D6E00285AD7 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				DBDDDEBF308A5DB800285AD7 /* XCRemoteSwiftPackageReference "oauth2" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DBDDDE743089DA3400285AD7 /* Products */;
 			projectDirPath = "";
@@ -615,6 +631,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DBDDDEBA308A5D6E00285AD7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = community;
+				kind = branch;
+			};
+		};
+		DBDDDEBF308A5DB800285AD7 /* XCRemoteSwiftPackageReference "oauth2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/p2/oauth2";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DBDDDEBB308A5D6E00285AD7 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DBDDDEBA308A5D6E00285AD7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		DBDDDEBD308A5D6E00285AD7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DBDDDEBA308A5D6E00285AD7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		DBDDDEC0308A5DB800285AD7 /* OAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DBDDDEBF308A5DB800285AD7 /* XCRemoteSwiftPackageReference "oauth2" */;
+			productName = OAuth2;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DBDDDE6B3089DA3400285AD7 /* Project object */;
 }

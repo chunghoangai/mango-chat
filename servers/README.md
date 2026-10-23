@@ -12,6 +12,27 @@ npm run dev
 
 Connect a WebSocket client to `ws://localhost:3000/ws?room=general&name=Guest`. Health check: `http://localhost:3000/health`.
 
+## REST API
+
+The REST handlers are deployed under `/api/chat/v1`:
+
+| Method and path | Purpose |
+| --- | --- |
+| `GET /api/chat/v1/all` | List rooms (alias for the room list) |
+| `GET /api/chat/v1/rooms` | List rooms |
+| `POST /api/chat/v1/rooms` | Create a room |
+| `GET /api/chat/v1/rooms/{roomId}` | Get room metadata |
+| `PATCH /api/chat/v1/rooms/{roomId}` | Update supplied room metadata fields |
+| `DELETE /api/chat/v1/rooms/{roomId}` | Delete a room and close its connected sockets |
+| `GET /api/chat/v1/rooms/{roomId}/messages?cursor={messageId}&limit=50` | Read a page of messages, newest page first |
+| `POST /api/chat/v1/rooms/{roomId}/messages` | Send a message |
+
+Create-room body: `{"roomName":"Design","roomType":"group","participantIds":["user-1","user-2"]}`.
+Room updates accept any subset of `roomName`, `roomType`, and `participantIds`, for example `{"roomName":"Design team"}`.
+Send-message body: `{"senderId":"user-1","text":"Hello","mediaURL":null}`.
+
+WebSocket connects at `/api/ws?roomId={roomId}&name={displayName}` and accepts room IDs created through REST. REST sends are broadcast as `message:new`. Login/OAuth is not implemented, so sender IDs are currently client-supplied. Unread counts are zero, and room/message data is in-memory only; use shared persistent storage before relying on this across Vercel instances or restarts.
+
 ## Protocol
 
 On connect, the server sends `connected`, `history` (up to 100 recent messages), then `presence`. Send JSON messages:
