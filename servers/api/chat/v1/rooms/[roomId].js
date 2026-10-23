@@ -1,4 +1,5 @@
 import { deleteRoom, getRoom, publicRoom, updateRoom } from '../../../../src/store.js';
+import { authenticateRequest } from '../../../../src/auth.js';
 
 function parseBody(body) {
   if (typeof body !== 'string') return body;
@@ -19,7 +20,8 @@ function validateUpdates(body) {
   return null;
 }
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
+  if (!await authenticateRequest(request, response)) return;
   const roomId = request.query?.roomId;
   if (request.method === 'GET') {
     const room = getRoom(roomId);

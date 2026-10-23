@@ -1,11 +1,14 @@
 import { createMessage, listMessages, MAX_MESSAGE_LENGTH } from '../../../../../src/store.js';
+import { authenticateRequest } from '../../../../../src/auth.js';
 
 function parseBody(body) {
   if (typeof body !== 'string') return body;
   try { return JSON.parse(body); } catch { return null; }
 }
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
+  const user = await authenticateRequest(request, response);
+  if (!user) return;
   const roomId = request.query?.roomId;
   if (request.method === 'GET') {
     const rawLimit = Number(request.query?.limit ?? 50);
@@ -17,12 +20,11 @@ export default function handler(request, response) {
   if (request.method === 'POST') {
     const body = parseBody(request.body);
     if (!body) return response.status(400).json({ error: 'Body must be valid JSON' });
-    if (typeof body.senderId !== 'string' || !body.senderId.trim()) return response.status(400).json({ error: 'senderId is required' });
     if (typeof body.text !== 'string' || !body.text.trim() || body.text.trim().length > MAX_MESSAGE_LENGTH) {
       return response.status(400).json({ error: `text must contain 1-${MAX_MESSAGE_LENGTH} characters` });
     }
     if (body.mediaURL != null && typeof body.mediaURL !== 'string') return response.status(400).json({ error: 'mediaURL must be a string or null' });
-    const message = createMessage(roomId, body);
+    const message = createMessage(roomId, { ...body, senderId: user.id });
     if (!message) return response.status(404).json({ error: 'Room not found' });
     return response.status(201).json({ message });
   }

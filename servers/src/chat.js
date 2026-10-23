@@ -21,10 +21,10 @@ function cleanRoom(value) {
   return /^[a-zA-Z0-9_-]{1,80}$/.test(room) ? room : null;
 }
 
-export function connectChat(socket, requestURL) {
+export function connectChat(socket, requestURL, authenticatedUser = null) {
   const url = new URL(requestURL, 'http://localhost');
   const room = cleanRoom(url.searchParams.get('room') ?? 'general');
-  const suppliedName = url.searchParams.get('name') ?? 'Guest';
+  const suppliedName = authenticatedUser?.name ?? url.searchParams.get('name') ?? 'Guest';
   const name = [...suppliedName.trim()].slice(0, MAX_NAME_LENGTH).join('') || 'Guest';
   if (!room) {
     send(socket, { type: 'error', error: 'Invalid room name' });
@@ -34,7 +34,7 @@ export function connectChat(socket, requestURL) {
 
   const state = roomStateForSocket(room);
   state.roomName = state.roomName || room;
-  const client = { id: randomUUID(), name, room, socket };
+  const client = { id: authenticatedUser?.id ?? randomUUID(), name, room, socket };
   state.clients.add(socket);
   socket.client = client;
 
