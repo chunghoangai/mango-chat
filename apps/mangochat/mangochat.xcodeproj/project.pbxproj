@@ -6,12 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		DBDDDEBC308A5D6E00285AD7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DBDDDEBB308A5D6E00285AD7 /* Realm */; };
-		DBDDDEBE308A5D6E00285AD7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DBDDDEBD308A5D6E00285AD7 /* RealmSwift */; };
-		DBDDDEC1308A5DB800285AD7 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = DBDDDEC0308A5DB800285AD7 /* OAuth2 */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		DBDDDE813089DA3700285AD7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -58,9 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBDDDEC1308A5DB800285AD7 /* OAuth2 in Frameworks */,
-				DBDDDEBE308A5D6E00285AD7 /* RealmSwift in Frameworks */,
-				DBDDDEBC308A5D6E00285AD7 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +201,7 @@
 			packageReferences = (
 				DBDDDEBA308A5D6E00285AD7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				DBDDDEBF308A5DB800285AD7 /* XCRemoteSwiftPackageReference "oauth2" */,
+				DB76948B308B4D7A00153A5E /* XCRemoteSwiftPackageReference "alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DBDDDE743089DA3400285AD7 /* Products */;
@@ -633,6 +625,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DB76948B308B4D7A00153A5E /* XCRemoteSwiftPackageReference "alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alamofire/alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.2;
+			};
+		};
 		DBDDDEBA308A5D6E00285AD7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
